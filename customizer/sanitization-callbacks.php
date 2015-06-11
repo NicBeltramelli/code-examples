@@ -133,17 +133,27 @@ function theme_slug_sanitize_html( $input ) {
  * @uses	in_array()				http://php.net/manual/en/function.in-array.php
  */
 function theme_slug_sanitize_image( $input, $setting ) {
-	// Return an array with file extension 
-	// and mime_type
-	$file = wp_check_filetype( $input );
+
 	// Array of valid image file types
 	// The array includes image mime types 
 	// that are included in wp_get_mime_types()
-	$mime_types = array( 'image/jpeg', 'image/gif', 'image/png', 'image/bmp', 'image/tiff', 'image/x-icon' );
+    $mimes = array(
+        'jpg|jpeg|jpe' => 'image/jpeg',
+        'gif'          => 'image/gif',
+        'png'          => 'image/png',
+        'bmp'          => 'image/bmp',
+        'tif|tiff'     => 'image/tiff',
+        'ico'          => 'image/x-icon'
+    );
+
+	// Return an array with file extension 
+	// and mime_type
+    $file = wp_check_filetype( $input, $mimes );
+
 	// If $input has a valid mime_type, 
 	// return it; otherwise, return 
 	// the default.
-	return ( in_array( $file, $mime_types, true ) ? $input : $setting->default );
+    return ( $file['ext'] ? $input : $setting->default );
 }
 
 /**
