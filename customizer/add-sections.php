@@ -74,7 +74,28 @@ function theme_slug_register_customizer_sections( $wp_customize ){
 	
 	
 	/**
-	 * Add Header Section for Color Options
+	 * Add Front Page Section for General Options
+	 * 
+	 * @uses	$wp_customize->add_section()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_section/
+	 * @link	$wp_customize->add_section()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_section
+	 * 
+	 * @param	string	$id			Section ID. Passed to $wp_customize->add_control()
+	 * @param	array	$args		Arguments passed to the Section
+	 */
+	$wp_customize->add_section(
+		// $id
+		'theme_slug_section_frontpage',
+		// $args
+		array(
+			'title'			=> __( 'Front Page Options', 'theme-slug' ),
+			'description'	=> __( 'Some description for the options in the front page section', 'theme-slug' ),
+			'panel'			=> 'theme_slug_panel_general'
+		)
+	);
+	
+	
+	/**
+	 * Add Color Section for Color Options
 	 * 
 	 * @uses	$wp_customize->add_section()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_section/
 	 * @link	$wp_customize->add_section()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_section
@@ -90,6 +111,27 @@ function theme_slug_register_customizer_sections( $wp_customize ){
 			'title'			=> __( 'Color Options', 'theme-slug' ),
 			'description'	=> __( 'Some description for the options in the colors section', 'theme-slug' ),
 			'panel'			=> 'theme_slug_panel_colors'
+		)
+	);
+	
+	
+	/**
+	 * Add CSS Section for Advanced Options
+	 * 
+	 * @uses	$wp_customize->add_section()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_section/
+	 * @link	$wp_customize->add_section()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_section
+	 * 
+	 * @param	string	$id			Section ID. Passed to $wp_customize->add_control()
+	 * @param	array	$args		Arguments passed to the Section
+	 */
+	$wp_customize->add_section(
+		// $id
+		'theme_slug_section_css',
+		// $args
+		array(
+			'title'			=> __( 'CSS Options', 'theme-slug' ),
+			'description'	=> __( 'Some description for the options in the CSS section', 'theme-slug' ),
+			'panel'			=> 'theme_slug_panel_advanced'
 		)
 	);
 

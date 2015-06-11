@@ -31,33 +31,6 @@ function theme_slug_register_customizer_settings( $wp_customize ){
 	}
 	
 	/**
-	 * Setting: Color Scheme
-	 * Control: select
-	 * Sanitization: select
-	 * 
-	 * Uses a dropdown select to configure the
-	 * Theme color scheme, from a defined list 
-	 * of valid color choices.
-	 * 
-	 * @uses	$wp_customize->add_setting()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_setting/
-	 * @link	$wp_customize->add_setting()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
-	 * 
-	 * @param	string	$id			Setting ID. Passed to $wp_customize->add_control()
-	 * @param	array	$args		Arguments passed to the Setting
-	 */
-	$wp_customize->add_setting(
-		// $id
-		'color_scheme',
-		// $args
-		array(
-			'default'			=> 'blue',
-			'type'				=> 'theme_mod',
-			'capability'		=> 'edit_theme_options',
-			'sanitize_callback'	=> 'theme_slug_sanitize_select'
-		)
-	);
-	
-	/**
 	 * Setting: Menu Position 
 	 * Control: select
 	 * Sanitization: select
@@ -135,6 +108,87 @@ function theme_slug_register_customizer_settings( $wp_customize ){
 			'type'				=> 'theme_mod',
 			'capability'		=> 'edit_theme_options',
 			'sanitize_callback'	=> 'theme_slug_sanitize_checkbox'
+		)
+	);
+	
+	/**
+	 * Setting: Call-To-Action Link
+	 * Control: dropdown pages
+	 * Sanitization: dropdown_pages
+	 * 
+	 * Uses a dropdown pages select to configure 
+	 * the page linke for a front page Call-To-Action 
+	 * button.
+	 * 
+	 * @uses	$wp_customize->add_setting()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_setting/
+	 * @link	$wp_customize->add_setting()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
+	 * 
+	 * @param	string	$id			Setting ID. Passed to $wp_customize->add_control()
+	 * @param	array	$args		Arguments passed to the Setting
+	 */
+	$wp_customize->add_setting(
+		// $id
+		'cta_link',
+		// $args
+		array(
+			'default'			=> '',
+			'type'				=> 'theme_mod',
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback'	=> 'theme_slug_sanitize_dropdown_pages'
+		)
+	);
+	
+	/**
+	 * Setting: Color Scheme
+	 * Control: select
+	 * Sanitization: select
+	 * 
+	 * Uses a dropdown select to configure the
+	 * Theme color scheme, from a defined list 
+	 * of valid color choices.
+	 * 
+	 * @uses	$wp_customize->add_setting()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_setting/
+	 * @link	$wp_customize->add_setting()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
+	 * 
+	 * @param	string	$id			Setting ID. Passed to $wp_customize->add_control()
+	 * @param	array	$args		Arguments passed to the Setting
+	 */
+	$wp_customize->add_setting(
+		// $id
+		'color_scheme',
+		// $args
+		array(
+			'default'			=> 'blue',
+			'type'				=> 'theme_mod',
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback'	=> 'theme_slug_sanitize_select'
+		)
+	);
+	
+	/**
+	 * Setting: Custom CSS
+	 * Control: textarea
+	 * Sanitization: css
+	 * 
+	 * Uses a textarea to configure the
+	 * user-defined custom CSS for the 
+	 * Theme.
+	 * 
+	 * @uses	$wp_customize->add_setting()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_setting/
+	 * @link	$wp_customize->add_setting()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
+	 * 
+	 * @param	string	$id			Setting ID. Passed to $wp_customize->add_control()
+	 * @param	array	$args		Arguments passed to the Setting
+	 */
+	$wp_customize->add_setting(
+		// $id
+		'color_scheme',
+		// $args
+		array(
+			'default'			=> '',
+			'type'				=> 'theme_mod',
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback'	=> 'theme_slug_sanitize_css'
 		)
 	);
 

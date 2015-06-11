@@ -23,24 +23,73 @@ function theme_slug_sanitize_checkbox( $input ) {
 }
 
 /**
+ * Sanitization: css 
+ * Control: text, textarea 
+ * 
+ * Sanitization callback for 'css' type textarea inputs. This 
+ * callback sanitizes $input for valid CSS.
+ * 
+ * NOTE: wp_strip_all_tags() can be passed directly as 
+ * $wp_customize->add_setting() 'sanitize_callback'. It 
+ * is wrapped in a callback here merely for example 
+ * purposes.
+ * 
+ * @uses	wp_strip_all_tags()	https://developer.wordpress.org/reference/functions/wp_strip_all_tags
+ */
+function theme_slug_sanitize_css( $input ) {
+	return wp_strip_all_tags( $input );
+}
+
+/**
+ * Sanitization: dropdown-pages  
+ * Control: dropdown-pages  
+ * 
+ * Sanitization callback for 'dropdown-pages' type controls. 
+ * This callback sanitizes $input as an absolute integer, 
+ * and then validates that $input is the ID of a published 
+ * page.
+ * 
+ * @uses	absint()			https://developer.wordpress.org/reference/functions/absint
+ * @uses	get_post_status()	https://developer.wordpress.org/reference/functions/get_post_status
+ */
+function theme_slug_sanitize_dropdown_pages( $input, $setting ) {
+	// Ensure input is an absolute integer
+	$input = absint( $input );
+	// If the input is an ID of a 
+	// published page, return it;
+	// otherwise, return the default
+	return ( 'publish' == get_post_status( $input ) ? $input : $setting->default );
+}
+
+/**
  * Sanitization: html 
- * Control: text 
+ * Control: text, textarea  
  * 
  * Sanitization callback for 'html' type text inputs. This 
  * callback sanitizes $input for HTML allowable in posts.
  * 
- * @uses	wp_filter_kses()	https://developer.wordpress.org/reference/functions/wp_filter_kses	
+ * NOTE: wp_filter_post_kses() can be passed directly as 
+ * $wp_customize->add_setting() 'sanitize_callback'. It 
+ * is wrapped in a callback here merely for example 
+ * purposes.
+ * 
+ * @uses	wp_filter_post_kses()	https://developer.wordpress.org/reference/functions/wp_filter_post_kses	
  */
 function theme_slug_sanitize_html( $input ) {
-	return wp_filter_kses( $input );
+	return wp_filter_post_kses( $input );
 }
 
 /**
  * Sanitization: nohtml 
- * Control: text 
+ * Control: text, textarea 
  * 
  * Sanitization callback for 'nohtml' type text inputs. This 
  * callback sanitizes $input to remove all HTML.
+ * 
+ * NOTE: wp_filter_nohtml_kses() can be passed directly as 
+ * $wp_customize->add_setting() 'sanitize_callback'. It 
+ * is wrapped in a callback here merely for example 
+ * purposes.
  * 
  * @uses	wp_filter_nohtml_kses()	https://developer.wordpress.org/reference/functions/wp_filter_nohtml_kses	
  */
