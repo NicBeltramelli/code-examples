@@ -175,6 +175,24 @@ function theme_slug_sanitize_nohtml( $input ) {
 }
 
 /**
+ * Sanitization: number_absint 
+ * Control: number 
+ * 
+ * Sanitization callback for 'number' type text inputs. This 
+ * callback sanitizes $input to as an absolute integer.
+ * 
+ * NOTE: absint() can be passed directly as 
+ * $wp_customize->add_setting() 'sanitize_callback'. It 
+ * is wrapped in a callback here merely for example 
+ * purposes.
+ * 
+ * @uses	absint()	https://developer.wordpress.org/reference/functions/absint/ 
+ */
+function theme_slug_sanitize_number_absint( $input ) {
+	return absint( $input );
+}
+
+/**
  * Sanitization: select  
  * Control: select, radio 
  * 

@@ -30,6 +30,7 @@ function theme_slug_register_customizer_settings( $wp_customize ){
 		return;
 	}
 	
+	
 	/**
 	 * Setting: Menu Position 
 	 * Control: select
@@ -56,6 +57,7 @@ function theme_slug_register_customizer_settings( $wp_customize ){
 			'sanitize_callback'	=> 'theme_slug_sanitize_select'
 		)
 	);
+	
 	
 	/**
 	 * Setting: Site Logo
@@ -84,6 +86,7 @@ function theme_slug_register_customizer_settings( $wp_customize ){
 		)
 	);
 	
+	
 	/**
 	 * Setting: Contact Email 
 	 * Control: email 
@@ -110,6 +113,7 @@ function theme_slug_register_customizer_settings( $wp_customize ){
 			'sanitize_callback'	=> 'theme_slug_sanitize_email'
 		)
 	);
+	
 	
 	/**
 	 * Setting: Footer Copyright Text 
@@ -138,6 +142,7 @@ function theme_slug_register_customizer_settings( $wp_customize ){
 		)
 	);
 	
+	
 	/**
 	 * Setting: Display Footer Credit Link 
 	 * Control: checkbox 
@@ -165,13 +170,42 @@ function theme_slug_register_customizer_settings( $wp_customize ){
 		)
 	);
 	
+	
+	/**
+	 * Setting: Slide Count
+	 * Control: number
+	 * Sanitization: number_absint
+	 * 
+	 * Uses a number type text input to configure 
+	 * the number of sticky posts to display as 
+	 * slides in the front page slider
+	 * 
+	 * @uses	$wp_customize->add_setting()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_setting/
+	 * @link	$wp_customize->add_setting()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
+	 * 
+	 * @param	string	$id			Setting ID. Passed to $wp_customize->add_control()
+	 * @param	array	$args		Arguments passed to the Setting
+	 */
+	$wp_customize->add_setting(
+		// $id
+		'slide_count',
+		// $args
+		array(
+			'default'			=> 3,
+			'type'				=> 'theme_mod',
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback'	=> 'theme_slug_sanitize_number_absint'
+		)
+	);
+	
+	
 	/**
 	 * Setting: Call-To-Action Link
 	 * Control: dropdown pages
 	 * Sanitization: dropdown_pages
 	 * 
 	 * Uses a dropdown pages select to configure 
-	 * the page linke for a front page Call-To-Action 
+	 * the page link for a front page Call-To-Action 
 	 * button.
 	 * 
 	 * @uses	$wp_customize->add_setting()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_setting/
@@ -191,6 +225,7 @@ function theme_slug_register_customizer_settings( $wp_customize ){
 			'sanitize_callback'	=> 'theme_slug_sanitize_dropdown_pages'
 		)
 	);
+	
 	
 	/**
 	 * Setting: Color Scheme
@@ -219,6 +254,7 @@ function theme_slug_register_customizer_settings( $wp_customize ){
 		)
 	);
 	
+	
 	/**
 	 * Setting: Link Color
 	 * Control: WP_Customize_Color_Control
@@ -244,6 +280,7 @@ function theme_slug_register_customizer_settings( $wp_customize ){
 			'sanitize_callback'	=> 'theme_slug_sanitize_hex_color'
 		)
 	);
+	
 	
 	/**
 	 * Setting: Custom CSS

@@ -255,6 +255,34 @@ function theme_slug_register_customizer_controls_basic( $wp_customize ){
 			'description'	=> __( 'Contact email address to be displayed in the site footer.', 'theme-slug' )
 		)
 	);
+	
+	
+	/**
+	 * Control: Text: Number 
+	 * Setting: Slide Count
+	 * Sanitization: number  
+	 * 
+	 * Register the core "number" text control to be 
+	 * used to configure the Slide Count setting.
+	 * 
+	 * @uses	$wp_customize->add_control()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_control/
+	 * @link	$wp_customize->add_control()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_control
+	 * 
+	 * @param	string	$id			Control ID
+	 * @param	array	$args		Arguments passed to the Control
+	 */
+	$wp_customize->add_control(
+		// $id
+		'slide_count',
+		// $args
+		array(
+			'settings'		=> 'slide_count',
+			'section'		=> 'theme_slug_section_frontpage',
+			'type'			=> 'number',
+			'label'			=> __( 'Slide Count', 'theme-slug' ),
+			'description'	=> __( 'Set the number of sticky posts to display in the slider.', 'theme-slug' )
+		)
+	);
 
 }
 // Settings API options initilization and validation
