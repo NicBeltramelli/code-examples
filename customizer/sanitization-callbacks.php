@@ -23,7 +23,8 @@ function theme_slug_sanitize_checkbox( $input ) {
 }
 
 /**
- * HTML Text Sanitization Callback 
+ * Sanitization: html 
+ * Control: text 
  * 
  * Sanitization callback for 'html' type text inputs. This 
  * callback sanitizes $input for HTML allowable in posts.
@@ -35,7 +36,8 @@ function theme_slug_sanitize_html( $input ) {
 }
 
 /**
- * No HTML Text Sanitization Callback 
+ * Sanitization: nohtml 
+ * Control: text 
  * 
  * Sanitization callback for 'nohtml' type text inputs. This 
  * callback sanitizes $input to remove all HTML.
@@ -47,7 +49,8 @@ function theme_slug_sanitize_nohtml( $input ) {
 }
 
 /**
- * Select Sanitization Callback
+ * Sanitization: select  
+ * Control: select, radio 
  * 
  * Sanitization callback for 'select' and 'radio' type controls. 
  * This callback sanitizes $input as a slug, and then validates

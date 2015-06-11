@@ -35,7 +35,7 @@ function theme_slug_register_customizer_sections( $wp_customize ){
 	 * Add Header Section for General Options
 	 * 
 	 * @uses	$wp_customize->add_section()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_section/
-	 * @link	$wp_customize->add_panel()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_section
+	 * @link	$wp_customize->add_section()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_section
 	 * 
 	 * @param	string	$id			Section ID. Passed to $wp_customize->add_control()
 	 * @param	array	$args		Arguments passed to the Section
@@ -50,29 +50,49 @@ function theme_slug_register_customizer_sections( $wp_customize ){
 			'panel'			=> 'theme_slug_panel_general'
 		)
 	);
+	
+	
+	/**
+	 * Add Footer Section for General Options
+	 * 
+	 * @uses	$wp_customize->add_section()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_section/
+	 * @link	$wp_customize->add_section()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_section
+	 * 
+	 * @param	string	$id			Section ID. Passed to $wp_customize->add_control()
+	 * @param	array	$args		Arguments passed to the Section
+	 */
+	$wp_customize->add_section(
+		// $id
+		'theme_slug_section_footer',
+		// $args
+		array(
+			'title'			=> __( 'Footer Options', 'theme-slug' ),
+			'description'	=> __( 'Some description for the options in the footer section', 'theme-slug' ),
+			'panel'			=> 'theme_slug_panel_general'
+		)
+	);
+	
+	
+	/**
+	 * Add Header Section for Color Options
+	 * 
+	 * @uses	$wp_customize->add_section()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_section/
+	 * @link	$wp_customize->add_section()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_section
+	 * 
+	 * @param	string	$id			Section ID. Passed to $wp_customize->add_control()
+	 * @param	array	$args		Arguments passed to the Section
+	 */
+	$wp_customize->add_section(
+		// $id
+		'theme_slug_section_colors',
+		// $args
+		array(
+			'title'			=> __( 'Color Options', 'theme-slug' ),
+			'description'	=> __( 'Some description for the options in the colors section', 'theme-slug' ),
+			'panel'			=> 'theme_slug_panel_colors'
+		)
+	);
 
 }
 // Settings API options initilization and validation
 add_action( 'customize_register', 'theme_slug_register_customizer_sections' );
-
-
-/**
- * Select Sanitization Callback
- * 
- * Sanitization callback for 'select' type controls. This
- * callback sanitizes $input as a slug, and then validates
- * $input against the choices defined for the control.
- * 
- * @uses	sanitize_key()	https://developer.wordpress.org/reference/functions/sanitize_key/
- * @uses	$wp_customize->get_control()	https://developer.wordpress.org/reference/classes/wp_customize_manager/get_control/
- */
-function theme_slug_sanitize_select( $input, $setting ) {
-	// Ensure input is a slug
-	$input = sanitize_key( $input );
-	// Get list of choices from the control
-	// associated with the setting
-	$choices = $setting->manager->get_control( $setting->id )->choices;
-	// If the input is a valid key, return it;
-	// otherwise, return the default
-	return ( array_key_exists( $input, $choices ) ? $input : $setting->default );
-}
