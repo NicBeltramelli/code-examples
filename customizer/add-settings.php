@@ -85,6 +85,33 @@ function theme_slug_register_customizer_settings( $wp_customize ){
 	);
 	
 	/**
+	 * Setting: Contact Email 
+	 * Control: email 
+	 * Sanitization: email 
+	 * 
+	 * Uses an email text field to configure the
+	 * user's contact email address displayed 
+	 * in the site footer.
+	 * 
+	 * @uses	$wp_customize->add_setting()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_setting/
+	 * @link	$wp_customize->add_setting()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
+	 * 
+	 * @param	string	$id			Setting ID. Passed to $wp_customize->add_control()
+	 * @param	array	$args		Arguments passed to the Setting
+	 */
+	$wp_customize->add_setting(
+		// $id
+		'contact_email',
+		// $args
+		array(
+			'default'			=> '',
+			'type'				=> 'theme_mod',
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback'	=> 'theme_slug_sanitize_email'
+		)
+	);
+	
+	/**
 	 * Setting: Footer Copyright Text 
 	 * Control: text 
 	 * Sanitization: html 

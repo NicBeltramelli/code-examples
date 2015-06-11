@@ -3,15 +3,26 @@
  * Customizer: Add Controls: Basic
  *
  * This file demonstrates how to add 
- * basic core controls to the Customizer. The 
- * Customizer API includes basic controls for 
- * the following control types:
- * - text 
- * - checkbox 
- * - radio 
- * - select 
- * - textarea 
- * - dropdown pages
+ * basic core controls to the Customizer. 
+ * 
+ * The Customizer API includes basic controls 
+ * for the following control types:
+ * - basic: checkbox 
+ * - basic: dropdown pages
+ * - basic: radio 
+ * - basic: select 
+ * - basic: text 
+ * - basic: textarea 
+ * 
+ * WordPress 4.0 also introduced controls 
+ * for the following specialized text 
+ * input control types:
+ * - text: email
+ * - text: number 
+ * - text: password
+ * - text: search 
+ * - text: tel 
+ * - text: url 
  * 
  * @package 	code-examples
  * @copyright	Copyright (c) 2015, WordPress Theme Review Team
@@ -40,36 +51,7 @@ function theme_slug_register_customizer_controls_basic( $wp_customize ){
 	
 	
 	/**
-	 * Control: Text 
-	 * Setting: Footer Copyright Text
-	 * Sanitization: html  
-	 * 
-	 * Register the core "text" control to be 
-	 * used to configure the Footer Copyright 
-	 * Text setting.
-	 * 
-	 * @uses	$wp_customize->add_control()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_control/
-	 * @link	$wp_customize->add_control()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_control
-	 * 
-	 * @param	string	$id			Control ID
-	 * @param	array	$args		Arguments passed to the Control
-	 */
-	$wp_customize->add_control(
-		// $id
-		'footer_copyright_text',
-		// $args
-		array(
-			'settings'		=> 'footer_copyright_text',
-			'section'		=> 'theme_slug_section_footer',
-			'type'			=> 'text',
-			'label'			=> __( 'Footer Copyright Text', 'theme-slug' ),
-			'description'	=> __( 'Copyright or other text to be displayed in the site footer. HTML allowed.', 'theme-slug' )
-		)
-	);
-	
-	
-	/**
-	 * Control: Checkbox
+	 * Control: Basic: Checkbox
 	 * Setting: Display Footer Credit Link
 	 * Sanitization: checkbox 
 	 * 
@@ -98,7 +80,35 @@ function theme_slug_register_customizer_controls_basic( $wp_customize ){
 	
 	
 	/**
-	 * Control: Radio 
+	 * Control: Basic: Dropdown Pages 
+	 * Setting: Call-To-Action Link
+	 * Sanitization: dropdown_pages 
+	 * 
+	 * Register the core "dropdown-pages" control to be 
+	 * used to configure Call-To-Action Link setting.
+	 * 
+	 * @uses	$wp_customize->add_control()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_control/
+	 * @link	$wp_customize->add_control()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_control
+	 * 
+	 * @param	string	$id			Control ID
+	 * @param	array	$args		Arguments passed to the Control
+	 */
+	$wp_customize->add_control(
+		// $id
+		'cta_link',
+		// $args
+		array(
+			'settings'		=> 'cta_link',
+			'section'		=> 'theme_slug_section_frontpage',
+			'type'			=> 'dropdown-pages',
+			'label'			=> __( 'Call-To-Action Link', 'theme-slug' ),
+			'description'	=> __( 'Select the page to link to the Call-To-Action button on the front page.', 'theme-slug' ),
+		)
+	);
+	
+	
+	/**
+	 * Control: Basic: Radio 
 	 * Setting: Menu Position
 	 * Sanitization: select 
 	 * 
@@ -130,7 +140,7 @@ function theme_slug_register_customizer_controls_basic( $wp_customize ){
 	
 	
 	/**
-	 * Control: Select 
+	 * Control: Basic: Select 
 	 * Setting: Color Scheme
 	 * Sanitization: select 
 	 * 
@@ -163,7 +173,36 @@ function theme_slug_register_customizer_controls_basic( $wp_customize ){
 	
 	
 	/**
-	 * Control: Textarea 
+	 * Control: Basic: Text 
+	 * Setting: Footer Copyright Text
+	 * Sanitization: html  
+	 * 
+	 * Register the core "text" control to be 
+	 * used to configure the Footer Copyright 
+	 * Text setting.
+	 * 
+	 * @uses	$wp_customize->add_control()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_control/
+	 * @link	$wp_customize->add_control()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_control
+	 * 
+	 * @param	string	$id			Control ID
+	 * @param	array	$args		Arguments passed to the Control
+	 */
+	$wp_customize->add_control(
+		// $id
+		'footer_copyright_text',
+		// $args
+		array(
+			'settings'		=> 'footer_copyright_text',
+			'section'		=> 'theme_slug_section_footer',
+			'type'			=> 'text',
+			'label'			=> __( 'Footer Copyright Text', 'theme-slug' ),
+			'description'	=> __( 'Copyright or other text to be displayed in the site footer. HTML allowed.', 'theme-slug' )
+		)
+	);
+	
+	
+	/**
+	 * Control: Basic: Textarea 
 	 * Setting: Custom CSS
 	 * Sanitization: css 
 	 * 
@@ -191,12 +230,12 @@ function theme_slug_register_customizer_controls_basic( $wp_customize ){
 	
 	
 	/**
-	 * Control: Dropdown Pages 
-	 * Setting: Call-To-Action Link
-	 * Sanitization: dropdown_pages 
+	 * Control: Text: Email 
+	 * Setting: Contact Email
+	 * Sanitization: email  
 	 * 
-	 * Register the core "dropdown-pages" control to be 
-	 * used to configure Call-To-Action Link setting.
+	 * Register the core "email" text control to be 
+	 * used to configure the Contact Email setting.
 	 * 
 	 * @uses	$wp_customize->add_control()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_control/
 	 * @link	$wp_customize->add_control()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_control
@@ -206,14 +245,14 @@ function theme_slug_register_customizer_controls_basic( $wp_customize ){
 	 */
 	$wp_customize->add_control(
 		// $id
-		'cta_link',
+		'contact_email',
 		// $args
 		array(
-			'settings'		=> 'cta_link',
-			'section'		=> 'theme_slug_section_frontpage',
-			'type'			=> 'dropdown-pages',
-			'label'			=> __( 'Call-To-Action Link', 'theme-slug' ),
-			'description'	=> __( 'Select the page to link to the Call-To-Action button on the front page.', 'theme-slug' ),
+			'settings'		=> 'contact_email',
+			'section'		=> 'theme_slug_section_footer',
+			'type'			=> 'email',
+			'label'			=> __( 'Contact Email', 'theme-slug' ),
+			'description'	=> __( 'Contact email address to be displayed in the site footer.', 'theme-slug' )
 		)
 	);
 

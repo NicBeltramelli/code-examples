@@ -62,6 +62,27 @@ function theme_slug_sanitize_dropdown_pages( $input, $setting ) {
 }
 
 /**
+ * Sanitization: email  
+ * Control: text 
+ * 
+ * Sanitization callback for 'email' type text controls. 
+ * This callback sanitizes $input as a valid email 
+ * address.
+ * 
+ * @uses	sanitize_email()	https://developer.wordpress.org/reference/functions/sanitize_key/ 
+ * @link 	sanitize_email()	https://codex.wordpress.org/Function_Reference/sanitize_email
+ */
+function theme_slug_sanitize_email( $input, $setting ) {
+	// Sanitize $input as a hex value 
+	// without the hash prefix.
+	$email = sanitize_email( $input );
+	// If $input is a valid email,
+	// return it; otherwise, return 
+	// the default.
+	return ( ! null( $email ) ? $email : $setting->default );
+}
+
+/**
  * Sanitization: hex_color 
  * Control: text, WP_Customize_Color_Control 
  * 
@@ -74,7 +95,7 @@ function theme_slug_sanitize_dropdown_pages( $input, $setting ) {
  * @uses	sanitize_hex_color()			https://developer.wordpress.org/reference/functions/sanitize_hex_color/ 
  * @link	sanitize_hex_color_no_hash()	https://developer.wordpress.org/reference/functions/sanitize_hex_color_no_hash/
  */
-function theme_slug_sanitize_css( $input, $setting ) {
+function theme_slug_sanitize_hex_color( $input, $setting ) {
 	// Sanitize $input as a hex value 
 	// without the hash prefix.
 	$hex = sanitize_hex_color( $input );
