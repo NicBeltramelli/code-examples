@@ -58,6 +58,33 @@ function theme_slug_register_customizer_settings( $wp_customize ){
 	);
 	
 	/**
+	 * Setting: Site Logo
+	 * Control: WP_Customize_Image_Control
+	 * Sanitization: image
+	 * 
+	 * Uses the media manager to upload and 
+	 * select an image to be used as the 
+	 * site logo.
+	 * 
+	 * @uses	$wp_customize->add_setting()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_setting/
+	 * @link	$wp_customize->add_setting()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
+	 * 
+	 * @param	string	$id			Setting ID. Passed to $wp_customize->add_control()
+	 * @param	array	$args		Arguments passed to the Setting
+	 */
+	$wp_customize->add_setting(
+		// $id
+		'site_logo',
+		// $args
+		array(
+			'default'			=> '',
+			'type'				=> 'theme_mod',
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback'	=> 'theme_slug_sanitize_image'
+		)
+	);
+	
+	/**
 	 * Setting: Footer Copyright Text 
 	 * Control: text 
 	 * Sanitization: html 
@@ -162,6 +189,32 @@ function theme_slug_register_customizer_settings( $wp_customize ){
 			'type'				=> 'theme_mod',
 			'capability'		=> 'edit_theme_options',
 			'sanitize_callback'	=> 'theme_slug_sanitize_select'
+		)
+	);
+	
+	/**
+	 * Setting: Link Color
+	 * Control: WP_Customize_Color_Control
+	 * Sanitization: hex_color
+	 * 
+	 * Uses a color wheel to configure 
+	 * the Link Color setting.
+	 * 
+	 * @uses	$wp_customize->add_setting()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_setting/
+	 * @link	$wp_customize->add_setting()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
+	 * 
+	 * @param	string	$id			Setting ID. Passed to $wp_customize->add_control()
+	 * @param	array	$args		Arguments passed to the Setting
+	 */
+	$wp_customize->add_setting(
+		// $id
+		'link_color',
+		// $args
+		array(
+			'default'			=> '5588AA',
+			'type'				=> 'theme_mod',
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback'	=> 'theme_slug_sanitize_hex_color'
 		)
 	);
 	

@@ -34,7 +34,7 @@ function theme_slug_sanitize_checkbox( $input ) {
  * is wrapped in a callback here merely for example 
  * purposes.
  * 
- * @uses	wp_strip_all_tags()	https://developer.wordpress.org/reference/functions/wp_strip_all_tags
+ * @uses	wp_strip_all_tags()	https://developer.wordpress.org/reference/functions/wp_strip_all_tags/
  */
 function theme_slug_sanitize_css( $input ) {
 	return wp_strip_all_tags( $input );
@@ -49,8 +49,8 @@ function theme_slug_sanitize_css( $input ) {
  * and then validates that $input is the ID of a published 
  * page.
  * 
- * @uses	absint()			https://developer.wordpress.org/reference/functions/absint
- * @uses	get_post_status()	https://developer.wordpress.org/reference/functions/get_post_status
+ * @uses	absint()			https://developer.wordpress.org/reference/functions/absint/
+ * @uses	get_post_status()	https://developer.wordpress.org/reference/functions/get_post_status/
  */
 function theme_slug_sanitize_dropdown_pages( $input, $setting ) {
 	// Ensure input is an absolute integer
@@ -59,6 +59,29 @@ function theme_slug_sanitize_dropdown_pages( $input, $setting ) {
 	// published page, return it;
 	// otherwise, return the default
 	return ( 'publish' == get_post_status( $input ) ? $input : $setting->default );
+}
+
+/**
+ * Sanitization: hex_color 
+ * Control: text, WP_Customize_Color_Control 
+ * 
+ * Sanitization callback hex colors.
+ * 
+ * Note: sanitize_hex_color_no_hash() can also be used here, 
+ * depending on whether or not the hash prefix should be 
+ * stored/retrieved with the hex color value.
+ * 
+ * @uses	sanitize_hex_color()			https://developer.wordpress.org/reference/functions/sanitize_hex_color/ 
+ * @link	sanitize_hex_color_no_hash()	https://developer.wordpress.org/reference/functions/sanitize_hex_color_no_hash/
+ */
+function theme_slug_sanitize_css( $input, $setting ) {
+	// Sanitize $input as a hex value 
+	// without the hash prefix.
+	$hex = sanitize_hex_color( $input );
+	// If $input is a valid hex value,
+	// return it; otherwise, return 
+	// the default.
+	return ( ! null( $hex ) ? $hex : $setting->default );
 }
 
 /**
@@ -73,10 +96,33 @@ function theme_slug_sanitize_dropdown_pages( $input, $setting ) {
  * is wrapped in a callback here merely for example 
  * purposes.
  * 
- * @uses	wp_filter_post_kses()	https://developer.wordpress.org/reference/functions/wp_filter_post_kses	
+ * @uses	wp_filter_post_kses()	https://developer.wordpress.org/reference/functions/wp_filter_post_kses/ 
  */
 function theme_slug_sanitize_html( $input ) {
 	return wp_filter_post_kses( $input );
+}
+
+/**
+ * Sanitization: image 
+ * Control: text, WP_Customize_Image_Control 
+ * 
+ * Sanitization callback for images.
+ * 
+ * @uses	wp_check_filetype()		https://developer.wordpress.org/reference/functions/wp_check_filetype/
+ * @uses	in_array()				http://php.net/manual/en/function.in-array.php
+ */
+function theme_slug_sanitize_image( $input, $setting ) {
+	// Return an array with file extension 
+	// and mime_type
+	$file = wp_check_filetype( $input );
+	// Array of valid image file types
+	// The array includes image mime types 
+	// that are included in wp_get_mime_types()
+	$mime_types = array( 'image/jpeg', 'image/gif', 'image/png', 'image/bmp', 'image/tiff', 'image/x-icon' );
+	// If $input has a valid mime_type, 
+	// return it; otherwise, return 
+	// the default.
+	return ( in_array( $file, $mime_types, true ) ? $input : $setting->default );
 }
 
 /**
@@ -91,7 +137,7 @@ function theme_slug_sanitize_html( $input ) {
  * is wrapped in a callback here merely for example 
  * purposes.
  * 
- * @uses	wp_filter_nohtml_kses()	https://developer.wordpress.org/reference/functions/wp_filter_nohtml_kses	
+ * @uses	wp_filter_nohtml_kses()	https://developer.wordpress.org/reference/functions/wp_filter_nohtml_kses/ 
  */
 function theme_slug_sanitize_nohtml( $input ) {
 	return wp_filter_nohtml_kses( $input );
@@ -105,7 +151,7 @@ function theme_slug_sanitize_nohtml( $input ) {
  * This callback sanitizes $input as a slug, and then validates
  * $input against the choices defined for the control.
  * 
- * @uses	sanitize_key()	https://developer.wordpress.org/reference/functions/sanitize_key/
+ * @uses	sanitize_key()					https://developer.wordpress.org/reference/functions/sanitize_key/
  * @uses	$wp_customize->get_control()	https://developer.wordpress.org/reference/classes/wp_customize_manager/get_control/
  */
 function theme_slug_sanitize_select( $input, $setting ) {
