@@ -110,7 +110,28 @@ function theme_slug_register_customizer_sections( $wp_customize ){
 		array(
 			'title'			=> __( 'Color Options', 'theme-slug' ),
 			'description'	=> __( 'Some description for the options in the colors section', 'theme-slug' ),
-			'panel'			=> 'theme_slug_panel_colors'
+			'panel'			=> 'theme_slug_panel_colorslayouts'
+		)
+	);
+	
+	
+	/**
+	 * Add Layout Section for Layout Options
+	 * 
+	 * @uses	$wp_customize->add_section()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_section/
+	 * @link	$wp_customize->add_section()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_section
+	 * 
+	 * @param	string	$id			Section ID. Passed to $wp_customize->add_control()
+	 * @param	array	$args		Arguments passed to the Section
+	 */
+	$wp_customize->add_section(
+		// $id
+		'theme_slug_section_layouts',
+		// $args
+		array(
+			'title'			=> __( 'Layout Options', 'theme-slug' ),
+			'description'	=> __( 'Some description for the options in the layouts section', 'theme-slug' ),
+			'panel'			=> 'theme_slug_panel_colorslayouts'
 		)
 	);
 	

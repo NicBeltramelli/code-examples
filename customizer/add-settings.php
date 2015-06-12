@@ -32,6 +32,33 @@ function theme_slug_register_customizer_settings( $wp_customize ){
 	
 	
 	/**
+	 * Setting: Blog Layout 
+	 * Control: radio-image 
+	 * Sanitization: select 
+	 * 
+	 * Uses a custom radio-image control to configure 
+	 * the Blog Layout setting.
+	 * 
+	 * @uses	$wp_customize->add_setting()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_setting/
+	 * @link	$wp_customize->add_setting()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
+	 * 
+	 * @param	string	$id			Setting ID. Passed to $wp_customize->add_control()
+	 * @param	array	$args		Arguments passed to the Setting
+	 */
+	$wp_customize->add_setting(
+		// $id
+		'blog_layout',
+		// $args
+		array(
+			'default'			=> 'two-column-right',
+			'type'				=> 'theme_mod',
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback'	=> 'theme_slug_sanitize_select'
+		)
+	);
+	
+	
+	/**
 	 * Setting: Call-To-Action Link
 	 * Control: dropdown pages
 	 * Sanitization: dropdown_pages

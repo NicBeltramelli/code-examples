@@ -53,7 +53,7 @@ function theme_slug_register_customizer_panels( $wp_customize ){
 	);
 
 	/**
-	 * Add Panel for Color Settings
+	 * Add Panel for Color and Layout Settings
 	 * 
 	 * @uses	$wp_customize->add_panel()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_panel/
 	 * @link	$wp_customize->add_panel()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_panel
@@ -63,36 +63,14 @@ function theme_slug_register_customizer_panels( $wp_customize ){
 	 */
 	$wp_customize->add_panel(
 		// $id
-		'theme_slug_panel_colors',
+		'theme_slug_panel_colorslayouts',
 		// $args
 		array(
 			'priority' 			=> 11,
 			'capability' 		=> 'edit_theme_options',
 			'theme_supports'	=> '',
-			'title' 			=> __( 'Theme Name Color Settings', 'theme-slug' ),
-			'description' 		=> __( 'Configure color settings for the Theme Name Theme', 'theme-slug' ),
-		)
-	);
-
-	/**
-	 * Add Panel for Color Settings
-	 * 
-	 * @uses	$wp_customize->add_panel()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_panel/
-	 * @link	$wp_customize->add_panel()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_panel
-	 * 
-	 * @param	string	$id			Panel ID. Passed to $wp_customize->add_section()
-	 * @param	array	$args		Arguments passed to the Panel
-	 */
-	$wp_customize->add_panel(
-		// $id
-		'theme_slug_panel_colors',
-		// $args
-		array(
-			'priority' 			=> 11,
-			'capability' 		=> 'edit_theme_options',
-			'theme_supports'	=> '',
-			'title' 			=> __( 'Theme Name Color Settings', 'theme-slug' ),
-			'description' 		=> __( 'Configure color settings for the Theme Name Theme', 'theme-slug' ),
+			'title' 			=> __( 'Theme Name Colors and Layouts', 'theme-slug' ),
+			'description' 		=> __( 'Configure color and layout settings for the Theme Name Theme', 'theme-slug' ),
 		)
 	);
 
