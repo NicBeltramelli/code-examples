@@ -275,3 +275,22 @@ function theme_slug_sanitize_select( $input, $setting ) {
 	// otherwise, return the default
 	return ( array_key_exists( $input, $choices ) ? $input : $setting->default );
 }
+
+
+/**
+ * Sanitization: url 
+ * Control: text, url 
+ * 
+ * Sanitization callback for 'url' type text inputs. This 
+ * callback sanitizes $input as a valid URL.
+ * 
+ * NOTE: esc_url_raw() can be passed directly as 
+ * $wp_customize->add_setting() 'sanitize_callback'. It 
+ * is wrapped in a callback here merely for example 
+ * purposes.
+ * 
+ * @uses	esc_url_raw()	https://developer.wordpress.org/reference/functions/esc_url_raw/ 
+ */
+function theme_slug_sanitize_url( $input ) {
+	return esc_url_raw( $input );
+}

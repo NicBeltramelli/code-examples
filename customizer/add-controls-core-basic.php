@@ -320,6 +320,34 @@ function theme_slug_register_customizer_controls_basic( $wp_customize ){
 			)
 		)
 	);
+	
+	
+	/**
+	 * Control: Text: URL 
+	 * Setting: Contact Link
+	 * Sanitization: url
+	 * 
+	 * Register the core "url" text control to be 
+	 * used to configure the Contact Link setting.
+	 * 
+	 * @uses	$wp_customize->add_control()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_control/
+	 * @link	$wp_customize->add_control()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_control
+	 * 
+	 * @param	string	$id			Control ID
+	 * @param	array	$args		Arguments passed to the Control
+	 */
+	$wp_customize->add_control(
+		// $id
+		'contact_link',
+		// $args
+		array(
+			'settings'		=> 'contact_link',
+			'section'		=> 'theme_slug_section_footer',
+			'type'			=> 'url',
+			'label'			=> __( 'Contact Link', 'theme-slug' ),
+			'description'	=> __( 'Contact link URL to be displayed in the site footer.', 'theme-slug' )
+		)
+	);
 
 }
 // Settings API options initilization and validation
