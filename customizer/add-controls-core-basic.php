@@ -19,8 +19,8 @@
  * input control types:
  * - text: email
  * - text: number 
- * - text: password
- * - text: search 
+ * - text: password (not included here)
+ * - text: search (not included here)
  * - text: tel 
  * - text: url 
  * 
@@ -260,7 +260,7 @@ function theme_slug_register_customizer_controls_basic( $wp_customize ){
 	/**
 	 * Control: Text: Number 
 	 * Setting: Slide Count
-	 * Sanitization: number  
+	 * Sanitization: number_absint
 	 * 
 	 * Register the core "number" text control to be 
 	 * used to configure the Slide Count setting.
@@ -281,6 +281,43 @@ function theme_slug_register_customizer_controls_basic( $wp_customize ){
 			'type'			=> 'number',
 			'label'			=> __( 'Slide Count', 'theme-slug' ),
 			'description'	=> __( 'Set the number of sticky posts to display in the slider.', 'theme-slug' )
+		)
+	);
+	
+	
+	/**
+	 * Control: Text: Tel 
+	 * Setting: Contact Telephone
+	 * Sanitization: number_range
+	 * 
+	 * Register the core "tel" text control to be 
+	 * used to configure the Contact Telephone setting.
+	 * 
+	 * A valid telephone number is either 10 or 12 digits, 
+	 * so the control is passed attributes for min 10 and 
+	 * max 12, with step = 2.
+	 * 
+	 * @uses	$wp_customize->add_control()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_control/
+	 * @link	$wp_customize->add_control()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_control
+	 * 
+	 * @param	string	$id			Control ID
+	 * @param	array	$args		Arguments passed to the Control
+	 */
+	$wp_customize->add_control(
+		// $id
+		'contact_telephone',
+		// $args
+		array(
+			'settings'		=> 'contact_telephone',
+			'section'		=> 'theme_slug_section_footer',
+			'type'			=> 'number',
+			'label'			=> __( 'Contact Telephone', 'theme-slug' ),
+			'description'	=> __( 'Contact phone number to be displayed in the site footer. Numbers only.', 'theme-slug' ),
+			'input_attrs'	=> array(
+				'min'	=> 10,
+				'max'	=> 12,
+				'step'	=> 2
+			)
 		)
 	);
 

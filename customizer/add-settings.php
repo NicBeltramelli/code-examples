@@ -32,174 +32,6 @@ function theme_slug_register_customizer_settings( $wp_customize ){
 	
 	
 	/**
-	 * Setting: Menu Position 
-	 * Control: select
-	 * Sanitization: select
-	 * 
-	 * Uses a radio select to configure the
-	 * position of the primary nav menu, either
-	 * above or below the header image.
-	 * 
-	 * @uses	$wp_customize->add_setting()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_setting/
-	 * @link	$wp_customize->add_setting()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
-	 * 
-	 * @param	string	$id			Setting ID. Passed to $wp_customize->add_control()
-	 * @param	array	$args		Arguments passed to the Setting
-	 */
-	$wp_customize->add_setting(
-		// $id
-		'menu_position',
-		// $args
-		array(
-			'default'			=> 'above',
-			'type'				=> 'theme_mod',
-			'capability'		=> 'edit_theme_options',
-			'sanitize_callback'	=> 'theme_slug_sanitize_select'
-		)
-	);
-	
-	
-	/**
-	 * Setting: Site Logo
-	 * Control: WP_Customize_Image_Control
-	 * Sanitization: image
-	 * 
-	 * Uses the media manager to upload and 
-	 * select an image to be used as the 
-	 * site logo.
-	 * 
-	 * @uses	$wp_customize->add_setting()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_setting/
-	 * @link	$wp_customize->add_setting()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
-	 * 
-	 * @param	string	$id			Setting ID. Passed to $wp_customize->add_control()
-	 * @param	array	$args		Arguments passed to the Setting
-	 */
-	$wp_customize->add_setting(
-		// $id
-		'site_logo',
-		// $args
-		array(
-			'default'			=> '',
-			'type'				=> 'theme_mod',
-			'capability'		=> 'edit_theme_options',
-			'sanitize_callback'	=> 'theme_slug_sanitize_image'
-		)
-	);
-	
-	
-	/**
-	 * Setting: Contact Email 
-	 * Control: email 
-	 * Sanitization: email 
-	 * 
-	 * Uses an email text field to configure the
-	 * user's contact email address displayed 
-	 * in the site footer.
-	 * 
-	 * @uses	$wp_customize->add_setting()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_setting/
-	 * @link	$wp_customize->add_setting()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
-	 * 
-	 * @param	string	$id			Setting ID. Passed to $wp_customize->add_control()
-	 * @param	array	$args		Arguments passed to the Setting
-	 */
-	$wp_customize->add_setting(
-		// $id
-		'contact_email',
-		// $args
-		array(
-			'default'			=> '',
-			'type'				=> 'theme_mod',
-			'capability'		=> 'edit_theme_options',
-			'sanitize_callback'	=> 'theme_slug_sanitize_email'
-		)
-	);
-	
-	
-	/**
-	 * Setting: Footer Copyright Text 
-	 * Control: text 
-	 * Sanitization: html 
-	 * 
-	 * Uses a text field to configure the
-	 * user's copyright text displayed 
-	 * in the site footer.
-	 * 
-	 * @uses	$wp_customize->add_setting()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_setting/
-	 * @link	$wp_customize->add_setting()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
-	 * 
-	 * @param	string	$id			Setting ID. Passed to $wp_customize->add_control()
-	 * @param	array	$args		Arguments passed to the Setting
-	 */
-	$wp_customize->add_setting(
-		// $id
-		'footer_copyright_text',
-		// $args
-		array(
-			'default'			=> sprintf( __( 'Copyright %s. All rights reserved.', 'theme-slug' ), esc_html( get_bloginfo( 'name' ) ) ),
-			'type'				=> 'theme_mod',
-			'capability'		=> 'edit_theme_options',
-			'sanitize_callback'	=> 'theme_slug_sanitize_html'
-		)
-	);
-	
-	
-	/**
-	 * Setting: Display Footer Credit Link 
-	 * Control: checkbox 
-	 * Sanitization: checkbox
-	 * 
-	 * Uses a checkbox to configure the
-	 * display of the Theme developer's 
-	 * footer credit link.
-	 * 
-	 * @uses	$wp_customize->add_setting()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_setting/
-	 * @link	$wp_customize->add_setting()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
-	 * 
-	 * @param	string	$id			Setting ID. Passed to $wp_customize->add_control()
-	 * @param	array	$args		Arguments passed to the Setting
-	 */
-	$wp_customize->add_setting(
-		// $id
-		'display_footer_credit',
-		// $args
-		array(
-			'default'			=> false,
-			'type'				=> 'theme_mod',
-			'capability'		=> 'edit_theme_options',
-			'sanitize_callback'	=> 'theme_slug_sanitize_checkbox'
-		)
-	);
-	
-	
-	/**
-	 * Setting: Slide Count
-	 * Control: number
-	 * Sanitization: number_absint
-	 * 
-	 * Uses a number type text input to configure 
-	 * the number of sticky posts to display as 
-	 * slides in the front page slider
-	 * 
-	 * @uses	$wp_customize->add_setting()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_setting/
-	 * @link	$wp_customize->add_setting()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
-	 * 
-	 * @param	string	$id			Setting ID. Passed to $wp_customize->add_control()
-	 * @param	array	$args		Arguments passed to the Setting
-	 */
-	$wp_customize->add_setting(
-		// $id
-		'slide_count',
-		// $args
-		array(
-			'default'			=> 3,
-			'type'				=> 'theme_mod',
-			'capability'		=> 'edit_theme_options',
-			'sanitize_callback'	=> 'theme_slug_sanitize_number_absint'
-		)
-	);
-	
-	
-	/**
 	 * Setting: Call-To-Action Link
 	 * Control: dropdown pages
 	 * Sanitization: dropdown_pages
@@ -256,12 +88,13 @@ function theme_slug_register_customizer_settings( $wp_customize ){
 	
 	
 	/**
-	 * Setting: Link Color
-	 * Control: WP_Customize_Color_Control
-	 * Sanitization: hex_color
+	 * Setting: Contact Email 
+	 * Control: email 
+	 * Sanitization: email 
 	 * 
-	 * Uses a color wheel to configure 
-	 * the Link Color setting.
+	 * Uses an email text field to configure the
+	 * user's contact email address displayed 
+	 * in the site footer.
 	 * 
 	 * @uses	$wp_customize->add_setting()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_setting/
 	 * @link	$wp_customize->add_setting()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
@@ -271,13 +104,41 @@ function theme_slug_register_customizer_settings( $wp_customize ){
 	 */
 	$wp_customize->add_setting(
 		// $id
-		'link_color',
+		'contact_email',
 		// $args
 		array(
-			'default'			=> '5588AA',
+			'default'			=> '',
 			'type'				=> 'theme_mod',
 			'capability'		=> 'edit_theme_options',
-			'sanitize_callback'	=> 'theme_slug_sanitize_hex_color'
+			'sanitize_callback'	=> 'theme_slug_sanitize_email'
+		)
+	);
+	
+	
+	/**
+	 * Setting: Contact Telephone 
+	 * Control: tel 
+	 * Sanitization: number_range 
+	 * 
+	 * Uses a tel text field to configure the
+	 * user's contact telephone number displayed 
+	 * in the site footer.
+	 * 
+	 * @uses	$wp_customize->add_setting()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_setting/
+	 * @link	$wp_customize->add_setting()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
+	 * 
+	 * @param	string	$id			Setting ID. Passed to $wp_customize->add_control()
+	 * @param	array	$args		Arguments passed to the Setting
+	 */
+	$wp_customize->add_setting(
+		// $id
+		'contact_telephone',
+		// $args
+		array(
+			'default'			=> '',
+			'type'				=> 'theme_mod',
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback'	=> 'theme_slug_sanitize_number_range'
 		)
 	);
 	
@@ -306,6 +167,173 @@ function theme_slug_register_customizer_settings( $wp_customize ){
 			'type'				=> 'theme_mod',
 			'capability'		=> 'edit_theme_options',
 			'sanitize_callback'	=> 'theme_slug_sanitize_css'
+		)
+	);
+	
+	
+	/**
+	 * Setting: Display Footer Credit Link 
+	 * Control: checkbox 
+	 * Sanitization: checkbox
+	 * 
+	 * Uses a checkbox to configure the
+	 * display of the Theme developer's 
+	 * footer credit link.
+	 * 
+	 * @uses	$wp_customize->add_setting()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_setting/
+	 * @link	$wp_customize->add_setting()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
+	 * 
+	 * @param	string	$id			Setting ID. Passed to $wp_customize->add_control()
+	 * @param	array	$args		Arguments passed to the Setting
+	 */
+	$wp_customize->add_setting(
+		// $id
+		'display_footer_credit',
+		// $args
+		array(
+			'default'			=> false,
+			'type'				=> 'theme_mod',
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback'	=> 'theme_slug_sanitize_checkbox'
+		)
+	);
+	
+	
+	/**
+	 * Setting: Footer Copyright Text 
+	 * Control: text 
+	 * Sanitization: html 
+	 * 
+	 * Uses a text field to configure the
+	 * user's copyright text displayed 
+	 * in the site footer.
+	 * 
+	 * @uses	$wp_customize->add_setting()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_setting/
+	 * @link	$wp_customize->add_setting()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
+	 * 
+	 * @param	string	$id			Setting ID. Passed to $wp_customize->add_control()
+	 * @param	array	$args		Arguments passed to the Setting
+	 */
+	$wp_customize->add_setting(
+		// $id
+		'footer_copyright_text',
+		// $args
+		array(
+			'default'			=> sprintf( __( 'Copyright %s. All rights reserved.', 'theme-slug' ), esc_html( get_bloginfo( 'name' ) ) ),
+			'type'				=> 'theme_mod',
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback'	=> 'theme_slug_sanitize_html'
+		)
+	);
+	
+	
+	/**
+	 * Setting: Link Color
+	 * Control: WP_Customize_Color_Control
+	 * Sanitization: hex_color
+	 * 
+	 * Uses a color wheel to configure 
+	 * the Link Color setting.
+	 * 
+	 * @uses	$wp_customize->add_setting()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_setting/
+	 * @link	$wp_customize->add_setting()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
+	 * 
+	 * @param	string	$id			Setting ID. Passed to $wp_customize->add_control()
+	 * @param	array	$args		Arguments passed to the Setting
+	 */
+	$wp_customize->add_setting(
+		// $id
+		'link_color',
+		// $args
+		array(
+			'default'			=> '5588AA',
+			'type'				=> 'theme_mod',
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback'	=> 'theme_slug_sanitize_hex_color'
+		)
+	);
+	
+	
+	/**
+	 * Setting: Menu Position 
+	 * Control: select
+	 * Sanitization: select
+	 * 
+	 * Uses a radio select to configure the
+	 * position of the primary nav menu, either
+	 * above or below the header image.
+	 * 
+	 * @uses	$wp_customize->add_setting()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_setting/
+	 * @link	$wp_customize->add_setting()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
+	 * 
+	 * @param	string	$id			Setting ID. Passed to $wp_customize->add_control()
+	 * @param	array	$args		Arguments passed to the Setting
+	 */
+	$wp_customize->add_setting(
+		// $id
+		'menu_position',
+		// $args
+		array(
+			'default'			=> 'above',
+			'type'				=> 'theme_mod',
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback'	=> 'theme_slug_sanitize_select'
+		)
+	);
+	
+	
+	/**
+	 * Setting: Site Logo
+	 * Control: WP_Customize_Image_Control
+	 * Sanitization: image
+	 * 
+	 * Uses the media manager to upload and 
+	 * select an image to be used as the 
+	 * site logo.
+	 * 
+	 * @uses	$wp_customize->add_setting()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_setting/
+	 * @link	$wp_customize->add_setting()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
+	 * 
+	 * @param	string	$id			Setting ID. Passed to $wp_customize->add_control()
+	 * @param	array	$args		Arguments passed to the Setting
+	 */
+	$wp_customize->add_setting(
+		// $id
+		'site_logo',
+		// $args
+		array(
+			'default'			=> '',
+			'type'				=> 'theme_mod',
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback'	=> 'theme_slug_sanitize_image'
+		)
+	);
+	
+	
+	/**
+	 * Setting: Slide Count
+	 * Control: number
+	 * Sanitization: number_absint
+	 * 
+	 * Uses a number type text input to configure 
+	 * the number of sticky posts to display as 
+	 * slides in the front page slider
+	 * 
+	 * @uses	$wp_customize->add_setting()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_setting/
+	 * @link	$wp_customize->add_setting()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_setting
+	 * 
+	 * @param	string	$id			Setting ID. Passed to $wp_customize->add_control()
+	 * @param	array	$args		Arguments passed to the Setting
+	 */
+	$wp_customize->add_setting(
+		// $id
+		'slide_count',
+		// $args
+		array(
+			'default'			=> 3,
+			'type'				=> 'theme_mod',
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback'	=> 'theme_slug_sanitize_number_absint'
 		)
 	);
 
