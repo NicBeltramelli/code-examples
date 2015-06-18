@@ -227,7 +227,7 @@ function theme_slug_sanitize_number_absint( $input, $setting ) {
  * @uses	absint()	https://developer.wordpress.org/reference/functions/absint/ 
  * @link	is_int()	http://php.net/manual/en/function.is-int.php
  */
-function theme_slug_sanitize_number_range( $input ) {
+function theme_slug_sanitize_number_range( $input, $setting ) {
 	
 	// Ensure input is an absolute integer
 	$input = absint( $input );
