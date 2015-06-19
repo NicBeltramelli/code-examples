@@ -2,29 +2,26 @@
 /**
  * Customizer: Add Control: Custom: Radio Image
  *
- * This file demonstrates how to add 
- * a custom radio-image control to the 
- * Customizer
+ * This file demonstrates how to add a custom radio-image control to the Customizer.
  * 
- * @package 	code-examples
- * @copyright	Copyright (c) 2015, WordPress Theme Review Team
- * @license		http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU General Public License, v2 (or newer)
+ * @package code-examples
+ * @copyright Copyright (c) 2015, WordPress Theme Review Team
+ * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU General Public License, v2 (or newer)
  */
  
 
 /**
  * Theme Options Customizer Implementation
  *
- * Implement the Theme Customizer for 
- * Theme Settings.
- * 
- * @param 	object	$wp_customize	Object that holds the customizer data
- * 
- * @link	http://ottopress.com/2012/how-to-leverage-the-theme-customizer-in-your-own-themes/	Otto
+ * Implement the Theme Customizer for Theme Settings.
+ *
+ * @link http://ottopress.com/2012/how-to-leverage-the-theme-customizer-in-your-own-themes/
+ *
+ * @param WP_Customize_Manager $wp_customize Object that holds the customizer data.
  */
 function theme_slug_register_customizer_control_custom_radio_image( $wp_customize ){
 
-	/**
+	/*
 	 * Failsafe is safe
 	 */
 	if ( ! isset( $wp_customize ) ) {
@@ -34,40 +31,41 @@ function theme_slug_register_customizer_control_custom_radio_image( $wp_customiz
 	/**
 	 * Create a Radio-Image control
 	 * 
-	 * This class incorporates code from the Kirki Customizer Framework
-	 * and from a tutorial written by Otto Wood
+	 * This class incorporates code from the Kirki Customizer Framework and from a tutorial
+	 * written by Otto Wood.
 	 * 
-	 * The Kirki Customizer Framework, @copyright Aristeides Stathopoulos (@aristath),
-	 * is licensed under the terms of the GNU GPL, Version 2 (or later)
+	 * The Kirki Customizer Framework, Copyright Aristeides Stathopoulos (@aristath),
+	 * is licensed under the terms of the GNU GPL, Version 2 (or later).
 	 * 
-	 * @link	https://github.com/reduxframework/kirki/
-	 * @link	http://ottopress.com/2012/making-a-custom-control-for-the-theme-customizer/
+	 * @link https://github.com/reduxframework/kirki/
+	 * @link http://ottopress.com/2012/making-a-custom-control-for-the-theme-customizer/
 	 */
 	class Theme_Slug_Custom_Radio_Image_Control extends WP_Customize_Control {
 		
 		/**
 		 * Declare the control type.
+		 *
+		 * @access public
+		 * @var string
 		 */
 		public $type = 'radio-image';
 		
 		/**
-		 * Enqueue scripts and styles 
-		 * for the custom control. 
+		 * Enqueue scripts and styles for the custom control.
 		 * 
-		 * Scripts are hooked at 
-		 * 'customize_controls_enqueue_scripts'.
+		 * Scripts are hooked at {@see 'customize_controls_enqueue_scripts'}.
 		 * 
-		 * Note, you can also enqueue stylesheets 
-		 * here as well. Stylesheets are hooked 
+		 * Note, you can also enqueue stylesheets here as well. Stylesheets are hooked
 		 * at 'customize_controls_print_styles'.
+		 *
+		 * @access public
 		 */
 		public function enqueue() {
 			wp_enqueue_script( 'jquery-ui-button' );
 		}
 		
 		/**
-		 * Render the control to be 
-		 * displayed in the Customizer.
+		 * Render the control to be displayed in the Customizer.
 		 */
 		public function render_content() {
 			if ( empty( $this->choices ) ) {
@@ -98,18 +96,17 @@ function theme_slug_register_customizer_control_custom_radio_image( $wp_customiz
 	
 	
 	/**
-	 * Control: Radio Image 
-	 * Setting: Blog Layout
-	 * Sanitization: select 
+	 * Radio Image control.
+	 *
+	 * - Control: Radio Image
+	 * - Setting: Blog Layout
+	 * - Sanitization: select
 	 * 
-	 * Register "Theme_Slug_Custom_Radio_Image_Control" to be 
-	 * used to configure the Blog Posts Index Layout setting.
+	 * Register "Theme_Slug_Custom_Radio_Image_Control" to be  used to configure
+	 * the Blog Posts Index Layout setting.
 	 * 
-	 * @uses	$wp_customize->add_control()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_control/
-	 * @link	$wp_customize->add_control()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_control
-	 * 
-	 * @param	string	$id			Control ID
-	 * @param	array	$args		Arguments passed to the Control
+	 * @uses $wp_customize->add_control() https://developer.wordpress.org/reference/classes/wp_customize_manager/add_control/
+	 * @link $wp_customize->add_control() https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_control
 	 */
 	$wp_customize->add_control(
 		new Theme_Slug_Custom_Radio_Image_Control( 
@@ -139,13 +136,13 @@ add_action( 'customize_register', 'theme_slug_register_customizer_control_custom
 
 /**
  * Add CSS for custom controls
-	 * 
-	 * This function incorporates CSS from the Kirki Customizer Framework
-	 * 
-	 * The Kirki Customizer Framework, @copyright Aristeides Stathopoulos (@aristath),
-	 * is licensed under the terms of the GNU GPL, Version 2 (or later)
-	 * 
-	 * @link	https://github.com/reduxframework/kirki/
+ *
+ * This function incorporates CSS from the Kirki Customizer Framework
+ *
+ * The Kirki Customizer Framework, Copyright Aristeides Stathopoulos (@aristath),
+ * is licensed under the terms of the GNU GPL, Version 2 (or later)
+ *
+ * @link https://github.com/reduxframework/kirki/
  */
 function theme_slug_customizer_custom_control_css() { 
 	?>
