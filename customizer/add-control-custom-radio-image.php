@@ -17,7 +17,7 @@
  *
  * @link http://ottopress.com/2012/how-to-leverage-the-theme-customizer-in-your-own-themes/
  *
- * @param object $wp_customize Object that holds the customizer data.
+ * @param WP_Customize $wp_customize Object that holds the customizer data.
  */
 function theme_slug_register_customizer_control_custom_radio_image( $wp_customize ){
 
@@ -107,9 +107,6 @@ function theme_slug_register_customizer_control_custom_radio_image( $wp_customiz
 	 * 
 	 * @uses $wp_customize->add_control() https://developer.wordpress.org/reference/classes/wp_customize_manager/add_control/
 	 * @link $wp_customize->add_control() https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_control
-	 * 
-	 * @param string $id   Control ID.
-	 * @param array  $args Arguments passed to the Control.
 	 */
 	$wp_customize->add_control(
 		new Theme_Slug_Custom_Radio_Image_Control( 
