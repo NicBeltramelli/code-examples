@@ -20,7 +20,7 @@
  *
  * @link http://ottopress.com/2012/how-to-leverage-the-theme-customizer-in-your-own-themes/
  * 
- * @param WP_Customize $wp_customize Object that holds the customizer data.
+ * @param WP_Customize_Manager $wp_customize Object that holds the customizer data.
  */
 function theme_slug_register_customizer_controls_advanced( $wp_customize ){
 
