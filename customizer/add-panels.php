@@ -21,7 +21,7 @@
  */
 function theme_slug_register_customizer_panels( $wp_customize ){
 
-	/**
+	/*
 	 * Failsafe is safe
 	 */
 	if ( ! isset( $wp_customize ) ) {
