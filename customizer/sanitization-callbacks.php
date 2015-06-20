@@ -2,156 +2,163 @@
 /**
  * Customizer: Sanitization Callbacks
  *
- * This file demonstrates how to define 
- * sanitization callback functions for 
- * various data types.
+ * This file demonstrates how to define sanitization callback functions for various data types.
  * 
- * @package 	code-examples
- * @copyright	Copyright (c) 2015, WordPress Theme Review Team
- * @license		http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU General Public License, v2 (or newer)
+ * @package   code-examples
+ * @copyright Copyright (c) 2015, WordPress Theme Review Team
+ * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU General Public License, v2 (or newer)
  */
 
- 
 /**
- * Checkbox Sanitization Callback 
+ * Checkbox sanitization callback example.
  * 
- * Sanitization callback for 'checkbox' type controls.
- * This callback sanitizes $input as a Boolean value, either
- * TRUE or FALSE.
+ * Sanitization callback for 'checkbox' type controls. This callback sanitizes `$checked`
+ * as a boolean value, either TRUE or FALSE.
+ *
+ * @param bool $checked Whether the checkbox is checked.
+ * @return bool Whether the checkbox is checked.
  */
-function theme_slug_sanitize_checkbox( $input ) {
-	
-	// Boolean check 
-	return ( ( isset( $input ) && true == $input ) ? true : false );
+function theme_slug_sanitize_checkbox( $checked ) {
+	// Boolean check.
+	return ( ( isset( $checked ) && true == $checked ) ? true : false );
 }
 
-
 /**
- * Sanitization: css 
- * Control: text, textarea 
+ * CSS sanitization callback example.
+ *
+ * - Sanitization: css
+ * - Control: text, textarea
  * 
- * Sanitization callback for 'css' type textarea inputs. This 
- * callback sanitizes $input for valid CSS.
+ * Sanitization callback for 'css' type textarea inputs. This callback sanitizes
+ * `$css` for valid CSS.
  * 
- * NOTE: wp_strip_all_tags() can be passed directly as 
- * $wp_customize->add_setting() 'sanitize_callback'. It 
- * is wrapped in a callback here merely for example 
- * purposes.
+ * NOTE: wp_strip_all_tags() can be passed directly as `$wp_customize->add_setting()`
+ * 'sanitize_callback'. It is wrapped in a callback here merely for example purposes.
  * 
- * @uses	wp_strip_all_tags()	https://developer.wordpress.org/reference/functions/wp_strip_all_tags/
+ * @see wp_strip_all_tags() https://developer.wordpress.org/reference/functions/wp_strip_all_tags/
+ *
+ * @param string $css CSS to sanitize.
+ * @return string Sanitized CSS.
  */
-function theme_slug_sanitize_css( $input ) {
-	return wp_strip_all_tags( $input );
+function theme_slug_sanitize_css( $css ) {
+	return wp_strip_all_tags( $css );
 }
 
-
 /**
- * Sanitization: dropdown-pages  
- * Control: dropdown-pages  
+ * Drop-down Pages sanitization callback example.
+ *
+ * - Sanitization: dropdown-pages
+ * - Control: dropdown-pages
  * 
- * Sanitization callback for 'dropdown-pages' type controls. 
- * This callback sanitizes $input as an absolute integer, 
- * and then validates that $input is the ID of a published 
- * page.
+ * Sanitization callback for 'dropdown-pages' type controls. This callback sanitizes `$page_id`
+ * as an absolute integer, and then validates that $input is the ID of a published page.
  * 
- * @uses	absint()			https://developer.wordpress.org/reference/functions/absint/
- * @uses	get_post_status()	https://developer.wordpress.org/reference/functions/get_post_status/
+ * @see absint() https://developer.wordpress.org/reference/functions/absint/
+ * @see get_post_status() https://developer.wordpress.org/reference/functions/get_post_status/
+ *
+ * @param int                  $page    Page ID.
+ * @param WP_Customize_Setting $setting Setting instance.
+ * @return int|string Page ID if the page is published; otherwise, the setting default.
  */
-function theme_slug_sanitize_dropdown_pages( $input, $setting ) {
+function theme_slug_sanitize_dropdown_pages( $page_id, $setting ) {
+	// Ensure $input is an absolute integer.
+	$page_id = absint( $page_id );
 	
-	// Ensure input is an absolute integer
-	$input = absint( $input );
-	
-	// If the input is an ID of a 
-	// published page, return it;
-	// otherwise, return the default
-	return ( 'publish' == get_post_status( $input ) ? $input : $setting->default );
+	// If $page_id is an ID of a published page, return it; otherwise, return the default.
+	return ( 'publish' == get_post_status( $page_id ) ? $page_id : $setting->default );
 }
 
-
 /**
- * Sanitization: email  
- * Control: text 
+ * Email sanitization callback example.
+ *
+ * - Sanitization: email
+ * - Control: text
  * 
- * Sanitization callback for 'email' type text controls. 
- * This callback sanitizes $input as a valid email 
- * address.
+ * Sanitization callback for 'email' type text controls. This callback sanitizes `$email`
+ * as a valid email address.
  * 
- * @uses	sanitize_email()	https://developer.wordpress.org/reference/functions/sanitize_key/ 
- * @link 	sanitize_email()	https://codex.wordpress.org/Function_Reference/sanitize_email
+ * @see sanitize_email() https://developer.wordpress.org/reference/functions/sanitize_key/
+ * @link sanitize_email() https://codex.wordpress.org/Function_Reference/sanitize_email
+ *
+ * @param string               $email   Email address to sanitize.
+ * @param WP_Customize_Setting $setting Setting instance.
+ * @return string The sanitized email if not null; otherwise, the setting default.
  */
-function theme_slug_sanitize_email( $input, $setting ) {
+function theme_slug_sanitize_email( $email, $setting ) {
+	// Sanitize $input as a hex value without the hash prefix.
+	$email = sanitize_email( $email );
 	
-	// Sanitize $input as a hex value 
-	// without the hash prefix.
-	$email = sanitize_email( $input );
-	
-	// If $input is a valid email,
-	// return it; otherwise, return 
-	// the default.
+	// If $email is a valid email, return it; otherwise, return the default.
 	return ( ! null( $email ) ? $email : $setting->default );
 }
 
-
 /**
- * Sanitization: hex_color 
- * Control: text, WP_Customize_Color_Control 
+ * HEX Color sanitization callback example.
+ *
+ * - Sanitization: hex_color
+ * - Control: text, WP_Customize_Color_Control
  * 
- * Sanitization callback hex colors.
+ * Note: sanitize_hex_color_no_hash() can also be used here, depending on whether
+ * or not the hash prefix should be stored/retrieved with the hex color value.
  * 
- * Note: sanitize_hex_color_no_hash() can also be used here, 
- * depending on whether or not the hash prefix should be 
- * stored/retrieved with the hex color value.
- * 
- * @uses	sanitize_hex_color()			https://developer.wordpress.org/reference/functions/sanitize_hex_color/ 
- * @link	sanitize_hex_color_no_hash()	https://developer.wordpress.org/reference/functions/sanitize_hex_color_no_hash/
+ * @see sanitize_hex_color() https://developer.wordpress.org/reference/functions/sanitize_hex_color/
+ * @link sanitize_hex_color_no_hash() https://developer.wordpress.org/reference/functions/sanitize_hex_color_no_hash/
+ *
+ * @param string               $hex_color HEX color to sanitize.
+ * @param WP_Customize_Setting $setting   Setting instance.
+ * @return string The sanitized hex color if not null; otherwise, the setting default.
  */
-function theme_slug_sanitize_hex_color( $input, $setting ) {
+function theme_slug_sanitize_hex_color( $hex_color, $setting ) {
+	// Sanitize $input as a hex value without the hash prefix.
+	$hex_color = sanitize_hex_color( $hex_color );
 	
-	// Sanitize $input as a hex value 
-	// without the hash prefix.
-	$hex = sanitize_hex_color( $input );
-	
-	// If $input is a valid hex value,
-	// return it; otherwise, return 
-	// the default.
-	return ( ! null( $hex ) ? $hex : $setting->default );
+	// If $input is a valid hex value, return it; otherwise, return the default.
+	return ( ! null( $hex_color ) ? $hex_color : $setting->default );
 }
 
-
 /**
- * Sanitization: html 
- * Control: text, textarea  
+ * HTML sanitization callback example.
+ *
+ * - Sanitization: html
+ * - Control: text, textarea
  * 
- * Sanitization callback for 'html' type text inputs. This 
- * callback sanitizes $input for HTML allowable in posts.
+ * Sanitization callback for 'html' type text inputs. This callback sanitizes `$html`
+ * for HTML allowable in posts.
  * 
- * NOTE: wp_filter_post_kses() can be passed directly as 
- * $wp_customize->add_setting() 'sanitize_callback'. It 
- * is wrapped in a callback here merely for example 
- * purposes.
+ * NOTE: wp_filter_post_kses() can be passed directly as `$wp_customize->add_setting()`
+ * 'sanitize_callback'. It is wrapped in a callback here merely for example purposes.
  * 
- * @uses	wp_filter_post_kses()	https://developer.wordpress.org/reference/functions/wp_filter_post_kses/ 
+ * @see wp_filter_post_kses() https://developer.wordpress.org/reference/functions/wp_filter_post_kses/
+ *
+ * @param string $html HTML to sanitize.
+ * @return string Sanitized HTML.
  */
-function theme_slug_sanitize_html( $input ) {
-	return wp_filter_post_kses( $input );
+function theme_slug_sanitize_html( $html ) {
+	return wp_filter_post_kses( $html );
 }
 
-
 /**
- * Sanitization: image 
- * Control: text, WP_Customize_Image_Control 
+ * Image sanitization callback example.
+ *
+ * Checks the image's file extension and mime type against a whitelist. If they're allowed,
+ * send back the filename, otherwise, return the setting default.
+ *
+ * - Sanitization: image file extension
+ * - Control: text, WP_Customize_Image_Control
  * 
- * Sanitization callback for images.
- * 
- * @uses	wp_check_filetype()		https://developer.wordpress.org/reference/functions/wp_check_filetype/
- * @uses	in_array()				http://php.net/manual/en/function.in-array.php
+ * @see wp_check_filetype() https://developer.wordpress.org/reference/functions/wp_check_filetype/
+ *
+ * @param string               $image   Image filename.
+ * @param WP_Customize_Setting $setting Setting instance.
+ * @return string The image filename if the extension is allowed; otherwise, the setting default.
  */
-function theme_slug_sanitize_image( $input, $setting ) {
+function theme_slug_sanitize_image( $image, $setting ) {
 
-	// Array of valid image file types
-	// The array includes image mime types 
-	// that are included in wp_get_mime_types()
+	/*
+	 * Array of valid image file types.
+	 *
+	 * The array includes image mime types that are included in wp_get_mime_types()
+	 */
     $mimes = array(
         'jpg|jpeg|jpe' => 'image/jpeg',
         'gif'          => 'image/gif',
@@ -161,136 +168,141 @@ function theme_slug_sanitize_image( $input, $setting ) {
         'ico'          => 'image/x-icon'
     );
 
-	// Return an array with file extension 
-	// and mime_type
-    $file = wp_check_filetype( $input, $mimes );
+	// Return an array with file extension and mime_type.
+    $file = wp_check_filetype( $image, $mimes );
 
-	// If $input has a valid mime_type, 
-	// return it; otherwise, return 
-	// the default.
-    return ( $file['ext'] ? $input : $setting->default );
+	// If $image has a valid mime_type, return it; otherwise, return the default.
+    return ( $file['ext'] ? $image : $setting->default );
 }
 
-
 /**
- * Sanitization: nohtml 
- * Control: text, textarea, password 
+ * No-HTML sanitization callback example.
+ *
+ * - Sanitization: nohtml
+ * - Control: text, textarea, password
  * 
- * Sanitization callback for 'nohtml' type text inputs. This 
- * callback sanitizes $input to remove all HTML.
+ * Sanitization callback for 'nohtml' type text inputs. This callback sanitizes `$nohtml`
+ * to remove all HTML.
  * 
- * NOTE: wp_filter_nohtml_kses() can be passed directly as 
- * $wp_customize->add_setting() 'sanitize_callback'. It 
- * is wrapped in a callback here merely for example 
- * purposes.
+ * NOTE: wp_filter_nohtml_kses() can be passed directly as `$wp_customize->add_setting()`
+ * 'sanitize_callback'. It is wrapped in a callback here merely for example purposes.
  * 
- * @uses	wp_filter_nohtml_kses()	https://developer.wordpress.org/reference/functions/wp_filter_nohtml_kses/ 
+ * @see wp_filter_nohtml_kses() https://developer.wordpress.org/reference/functions/wp_filter_nohtml_kses/
+ *
+ * @param string $nohtml The no-HTML content to sanitize.
+ * @return string Sanitized no-HTML content.
  */
-function theme_slug_sanitize_nohtml( $input ) {
-	return wp_filter_nohtml_kses( $input );
+function theme_slug_sanitize_nohtml( $nohtml ) {
+	return wp_filter_nohtml_kses( $nohtml );
 }
 
-
 /**
- * Sanitization: number_absint 
- * Control: number 
+ * Number sanitization callback example.
+ *
+ * - Sanitization: number_absint
+ * - Control: number
  * 
- * Sanitization callback for 'number' type text inputs. This 
- * callback sanitizes $input as an absolute integer.
+ * Sanitization callback for 'number' type text inputs. This callback sanitizes `$number`
+ * as an absolute integer (whole number, zero or greater).
  * 
- * NOTE: absint() can be passed directly as 
- * $wp_customize->add_setting() 'sanitize_callback'. It 
- * is wrapped in a callback here merely for example 
- * purposes.
+ * NOTE: absint() can be passed directly as `$wp_customize->add_setting()` 'sanitize_callback'.
+ * It is wrapped in a callback here merely for example purposes.
  * 
- * @uses	absint()	https://developer.wordpress.org/reference/functions/absint/ 
+ * @see absint() https://developer.wordpress.org/reference/functions/absint/
+ *
+ * @param int                  $number  Number to sanitize.
+ * @param WP_Customize_Setting $setting Setting instance.
+ * @return int Sanitized number; otherwise, the setting default.
  */
-function theme_slug_sanitize_number_absint( $input, $setting ) {
+function theme_slug_sanitize_number_absint( $number, $setting ) {
+	// Ensure $number is an absolute integer (whole number, zero or greater).
+	$number = absint( $number );
 	
-	// Ensure input is an absolute integer
-	$input = absint( $input );
-	
-	// If the input is an absolute integer, return it;
-	// otherwise, return the default
-	return ( $input ? $input : $setting->default );
+	// If the input is an absolute integer, return it; otherwise, return the default
+	return ( $number ? $number : $setting->default );
 }
 
-
 /**
- * Sanitization: number_range 
- * Control: number, tel 
+ * Number Range sanitization callback example.
+ *
+ * - Sanitization: number_range
+ * - Control: number, tel
  * 
- * Sanitization callback for 'number' or 'tel' type text inputs. This 
- * callback sanitizes $input as an absolute integer within a defined 
- * min-max range.
+ * Sanitization callback for 'number' or 'tel' type text inputs. This callback sanitizes
+ * `$number` as an absolute integer within a defined min-max range.
  * 
- * @uses	absint()	https://developer.wordpress.org/reference/functions/absint/ 
- * @link	is_int()	http://php.net/manual/en/function.is-int.php
+ * @see absint() https://developer.wordpress.org/reference/functions/absint/
+ *
+ * @param int                  $number  Number to check within the numeric range defined by the setting.
+ * @param WP_Customize_Setting $setting Setting instance.
+ * @return int|string The number, if it is zero or greater and falls within the defined range; otherwise,
+ *                    the setting default.
  */
-function theme_slug_sanitize_number_range( $input, $setting ) {
+function theme_slug_sanitize_number_range( $number, $setting ) {
 	
-	// Ensure input is an absolute integer
-	$input = absint( $input );
+	// Ensure input is an absolute integer.
+	$number = absint( $number );
 	
-	// Get the input attributes
-	// associated with the setting
+	// Get the input attributes associated with the setting.
 	$atts = $setting->manager->get_control( $setting->id )->input_attrs;
 	
-	// Get min 
-	$min = ( isset( $atts['min'] ) ? $atts['min'] : $input );
+	// Get minimum number in the range.
+	$min = ( isset( $atts['min'] ) ? $atts['min'] : $number );
 	
-	// Get max 
-	$max = ( isset( $atts['max'] ) ? $atts['max'] : $input );
+	// Get maximum number in the range.
+	$max = ( isset( $atts['max'] ) ? $atts['max'] : $number );
 	
-	// Get Step
+	// Get step.
 	$step = ( isset( $atts['step'] ) ? $atts['step'] : 1 );
 	
-	// If the input is within the valid range, 
-	// return it; otherwise, return the default
-	return ( $min <= $input && $input <= $max && is_int( $input / $step ) ? $input : $setting->default );
+	// If the number is within the valid range, return it; otherwise, return the default
+	return ( $min <= $number && $number <= $max && is_int( $number / $step ) ? $number : $setting->default );
 }
 
-
 /**
- * Sanitization: select  
- * Control: select, radio 
+ * Select sanitization callback example.
+ *
+ * - Sanitization: select
+ * - Control: select, radio
  * 
- * Sanitization callback for 'select' and 'radio' type controls. 
- * This callback sanitizes $input as a slug, and then validates
- * $input against the choices defined for the control.
+ * Sanitization callback for 'select' and 'radio' type controls. This callback sanitizes `$input`
+ * as a slug, and then validates `$input` against the choices defined for the control.
  * 
- * @uses	sanitize_key()					https://developer.wordpress.org/reference/functions/sanitize_key/
- * @uses	$wp_customize->get_control()	https://developer.wordpress.org/reference/classes/wp_customize_manager/get_control/
+ * @see sanitize_key()               https://developer.wordpress.org/reference/functions/sanitize_key/
+ * @see $wp_customize->get_control() https://developer.wordpress.org/reference/classes/wp_customize_manager/get_control/
+ *
+ * @param string               $input   Slug to sanitize.
+ * @param WP_Customize_Setting $setting Setting instance.
+ * @return string Sanitized slug if it is a valid choice; otherwise, the setting default.
  */
 function theme_slug_sanitize_select( $input, $setting ) {
 	
-	// Ensure input is a slug
+	// Ensure input is a slug.
 	$input = sanitize_key( $input );
 	
-	// Get list of choices from the control
-	// associated with the setting
+	// Get list of choices from the control associated with the setting.
 	$choices = $setting->manager->get_control( $setting->id )->choices;
 	
-	// If the input is a valid key, return it;
-	// otherwise, return the default
+	// If the input is a valid key, return it; otherwise, return the default.
 	return ( array_key_exists( $input, $choices ) ? $input : $setting->default );
 }
 
-
 /**
- * Sanitization: url 
- * Control: text, url 
+ * URL sanitization callback example.
+ *
+ * - Sanitization: url
+ * - Control: text, url
  * 
- * Sanitization callback for 'url' type text inputs. This 
- * callback sanitizes $input as a valid URL.
+ * Sanitization callback for 'url' type text inputs. This callback sanitizes `$url` as a valid URL.
  * 
- * NOTE: esc_url_raw() can be passed directly as 
- * $wp_customize->add_setting() 'sanitize_callback'. It 
- * is wrapped in a callback here merely for example 
- * purposes.
+ * NOTE: esc_url_raw() can be passed directly as `$wp_customize->add_setting()` 'sanitize_callback'.
+ * It is wrapped in a callback here merely for example purposes.
  * 
- * @uses	esc_url_raw()	https://developer.wordpress.org/reference/functions/esc_url_raw/ 
+ * @see esc_url_raw() https://developer.wordpress.org/reference/functions/esc_url_raw/
+ *
+ * @param string $url URL to sanitize.
+ * @return string Sanitized URL.
  */
-function theme_slug_sanitize_url( $input ) {
-	return esc_url_raw( $input );
+function theme_slug_sanitize_url( $url ) {
+	return esc_url_raw( $url );
 }
