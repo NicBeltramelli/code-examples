@@ -2,28 +2,26 @@
 /**
  * Customizer: Add Panels
  *
- * This file demonstrates how to add 
- * Panels to the Customizer
+ * This file demonstrates how to add Panels to the Customizer.
  * 
- * @package 	code-examples
- * @copyright	Copyright (c) 2015, WordPress Theme Review Team
- * @license		http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU General Public License, v2 (or newer)
+ * @package   code-examples
+ * @copyright Copyright (c) 2015, WordPress Theme Review Team
+ * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU General Public License, v2 (or newer)
  */
  
 
 /**
- * Theme Options Customizer Implementation
+ * Theme Options Customizer Implementation.
  *
- * Implement the Theme Customizer for 
- * Theme Settings.
+ * Implement the Theme Customizer for Theme Settings.
+ *
+ * @link http://ottopress.com/2012/how-to-leverage-the-theme-customizer-in-your-own-themes/
  * 
- * @param 	object	$wp_customize	Object that holds the customizer data
- * 
- * @link	http://ottopress.com/2012/how-to-leverage-the-theme-customizer-in-your-own-themes/	Otto
+ * @param WP_Customize_Manager $wp_customize Object that holds the customizer data.
  */
 function theme_slug_register_customizer_panels( $wp_customize ){
 
-	/**
+	/*
 	 * Failsafe is safe
 	 */
 	if ( ! isset( $wp_customize ) ) {
@@ -31,13 +29,10 @@ function theme_slug_register_customizer_panels( $wp_customize ){
 	}
 
 	/**
-	 * Add Panel for General Settings
+	 * Add Panel for General Settings.
 	 * 
-	 * @uses	$wp_customize->add_panel()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_panel/
-	 * @link	$wp_customize->add_panel()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_panel
-	 * 
-	 * @param	string	$id			Panel ID. Passed to $wp_customize->add_section()
-	 * @param	array	$args		Arguments passed to the Panel
+	 * @uses $wp_customize->add_panel() https://developer.wordpress.org/reference/classes/wp_customize_manager/add_panel/
+	 * @link $wp_customize->add_panel() https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_panel
 	 */
 	$wp_customize->add_panel(
 		// $id
@@ -53,13 +48,10 @@ function theme_slug_register_customizer_panels( $wp_customize ){
 	);
 
 	/**
-	 * Add Panel for Color and Layout Settings
+	 * Add Panel for Color and Layout Settings.
 	 * 
-	 * @uses	$wp_customize->add_panel()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_panel/
-	 * @link	$wp_customize->add_panel()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_panel
-	 * 
-	 * @param	string	$id			Panel ID. Passed to $wp_customize->add_section()
-	 * @param	array	$args		Arguments passed to the Panel
+	 * @uses $wp_customize->add_panel() https://developer.wordpress.org/reference/classes/wp_customize_manager/add_panel/
+	 * @link $wp_customize->add_panel() https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_panel
 	 */
 	$wp_customize->add_panel(
 		// $id
@@ -75,13 +67,10 @@ function theme_slug_register_customizer_panels( $wp_customize ){
 	);
 
 	/**
-	 * Add Panel for Advanced Settings
+	 * Add Panel for Advanced Settings.
 	 * 
-	 * @uses	$wp_customize->add_panel()	https://developer.wordpress.org/reference/classes/wp_customize_manager/add_panel/
-	 * @link	$wp_customize->add_panel()	https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_panel
-	 * 
-	 * @param	string	$id			Panel ID. Passed to $wp_customize->add_section()
-	 * @param	array	$args		Arguments passed to the Panel
+	 * @uses $wp_customize->add_panel() https://developer.wordpress.org/reference/classes/wp_customize_manager/add_panel/
+	 * @link $wp_customize->add_panel() https://codex.wordpress.org/Class_Reference/WP_Customize_Manager/add_panel
 	 */
 	$wp_customize->add_panel(
 		// $id
@@ -95,7 +84,7 @@ function theme_slug_register_customizer_panels( $wp_customize ){
 			'description' 		=> __( 'Configure advanced settings for the Theme Name Theme', 'theme-slug' ),
 		)
 	);
-
 }
+
 // Settings API options initilization and validation
 add_action( 'customize_register', 'theme_slug_register_customizer_panels' );
