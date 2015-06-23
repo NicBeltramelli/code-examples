@@ -84,7 +84,7 @@ function theme_slug_register_customizer_control_custom_radio_image( $wp_customiz
 				<?php foreach ( $this->choices as $value => $label ) : ?>
 					<input class="image-select" type="radio" value="<?php echo esc_attr( $value ); ?>" id="<?php echo $this->id . $value; ?>" name="<?php echo esc_attr( $name ); ?>" <?php $this->link(); checked( $this->value(), $value ); ?>>
 						<label for="<?php echo $this->id . $value; ?>">
-							<img src="<?php echo esc_html( $label ); ?>" alt="<?php echo esc_attr( $value ); ?> title="<?php echo esc_attr( $value ); ?>">
+							<img src="<?php echo esc_html( $label ); ?>" alt="<?php echo esc_attr( $value ); ?>" title="<?php echo esc_attr( $value ); ?>">
 						</label>
 					</input>
 				<?php endforeach; ?>
