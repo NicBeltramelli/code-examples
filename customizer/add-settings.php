@@ -193,7 +193,7 @@ function theme_slug_register_customizer_settings( $wp_customize ){
 	 */
 	$wp_customize->add_setting(
 		// $id
-		'color_scheme',
+		'custom_css',
 		// $args
 		array(
 			'default'			=> '',
