@@ -62,7 +62,7 @@ function theme_slug_register_customizer_controls_basic( $wp_customize ){
 		'display_footer_credit_link',
 		// $args
 		array(
-			'settings'		=> 'display_footer_credit_link',
+			'settings'		=> 'display_footer_credit',
 			'section'		=> 'theme_slug_section_footer',
 			'type'			=> 'checkbox',
 			'label'			=> __( 'Display Footer Credit Link', 'theme-slug' ),
