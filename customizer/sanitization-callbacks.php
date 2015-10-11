@@ -89,7 +89,7 @@ function theme_slug_sanitize_email( $email, $setting ) {
 	$email = sanitize_email( $email );
 	
 	// If $email is a valid email, return it; otherwise, return the default.
-	return ( ! null( $email ) ? $email : $setting->default );
+	return ( ! is_null( $email ) ? $email : $setting->default );
 }
 
 /**
@@ -113,7 +113,7 @@ function theme_slug_sanitize_hex_color( $hex_color, $setting ) {
 	$hex_color = sanitize_hex_color( $hex_color );
 	
 	// If $input is a valid hex value, return it; otherwise, return the default.
-	return ( ! null( $hex_color ) ? $hex_color : $setting->default );
+	return ( ! is_null( $hex_color ) ? $hex_color : $setting->default );
 }
 
 /**
