@@ -85,7 +85,7 @@ function theme_slug_sanitize_dropdown_pages( $page_id, $setting ) {
  * @return string The sanitized email if not null; otherwise, the setting default.
  */
 function theme_slug_sanitize_email( $email, $setting ) {
-	// Sanitize $input as a hex value without the hash prefix.
+	// Strips out all characters that are not allowable in an email address.
 	$email = sanitize_email( $email );
 	
 	// If $email is a valid email, return it; otherwise, return the default.
