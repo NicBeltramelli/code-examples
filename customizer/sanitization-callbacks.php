@@ -85,11 +85,11 @@ function theme_slug_sanitize_dropdown_pages( $page_id, $setting ) {
  * @return string The sanitized email if not null; otherwise, the setting default.
  */
 function theme_slug_sanitize_email( $email, $setting ) {
-	// Sanitize $input as a hex value without the hash prefix.
+	// Strips out all characters that are not allowable in an email address.
 	$email = sanitize_email( $email );
 	
 	// If $email is a valid email, return it; otherwise, return the default.
-	return ( ! null( $email ) ? $email : $setting->default );
+	return ( ! is_null( $email ) ? $email : $setting->default );
 }
 
 /**
@@ -113,7 +113,7 @@ function theme_slug_sanitize_hex_color( $hex_color, $setting ) {
 	$hex_color = sanitize_hex_color( $hex_color );
 	
 	// If $input is a valid hex value, return it; otherwise, return the default.
-	return ( ! null( $hex_color ) ? $hex_color : $setting->default );
+	return ( ! is_null( $hex_color ) ? $hex_color : $setting->default );
 }
 
 /**
